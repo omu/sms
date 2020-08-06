@@ -18,7 +18,7 @@ class MutluCellTest < Minitest::Test
 
   def setup
     WebMock.enable!
-    WebMock.stub_request(:post, ENDPOINT)
+    WebMock.stub_request(:post, ENDPOINT).to_return(body: '$123#19', status: 200)
   end
 
   def teardown

@@ -20,7 +20,7 @@ module SMS
         </sms>
       TEMPLATE
 
-      def on_http_succes(*)
+      def on_http_success(*)
         nil
       end
     end
