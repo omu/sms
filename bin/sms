@@ -12,7 +12,6 @@ rescue LoadError
 end
 
 def report(result)
-  puts
   print 'Result: '
   if result.ok?
     pretty result.inspect

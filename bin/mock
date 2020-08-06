@@ -25,6 +25,7 @@ def mock(**args) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     puts "Headers:  #{request[:headers]}"
     puts
     puts request[:body]
+    puts
   end
 
   result = SMS.(**args)
@@ -45,7 +46,6 @@ rescue LoadError
 end
 
 def report(result)
-  puts
   print 'Result: '
   if result.ok?
     pretty result.inspect
