@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'sms/support'
 require_relative 'sms/error'
+require_relative 'sms/support'
 require_relative 'sms/message'
+require_relative 'sms/result'
 require_relative 'sms/dsl'
 require_relative 'sms/provider'
 

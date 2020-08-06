@@ -19,6 +19,10 @@ module SMS
           <tur>Turkce</tur>
         </sms>
       TEMPLATE
+
+      def on_http_succes(*)
+        nil
+      end
     end
   end
 end

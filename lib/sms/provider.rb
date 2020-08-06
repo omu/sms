@@ -57,12 +57,24 @@ module SMS
       def post(data)
         api = self.class.api
 
-        SMS::HTTP.post(data: data, endpoint: api.endpoint, options: api.options, header: api.header).tap do |response|
-          after_post(response)
-        end
+        result = Result.new SMS::HTTP.post(data: data, endpoint: api.endpoint, options: api.options, header: api.header)
+        on_http_success(result)
+        raise ProviderError, result.error if result.notok?
+
+        result
+      rescue HTTP::Error => e
+        result.error = e.message
+        on_http_failure(result)
+        raise
       end
 
-      def after_post(*); end
+      def on_http_success(*)
+        raise NotImplementedError
+      end
+
+      def on_http_failure(*)
+        # optional
+      end
 
       def to_h
         config.to_h

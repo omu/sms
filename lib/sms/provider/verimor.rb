@@ -20,6 +20,10 @@ module SMS
           ]
         }
       TEMPLATE
+
+      def on_http_success(*)
+        nil
+      end
     end
   end
 end

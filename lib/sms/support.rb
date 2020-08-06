@@ -124,7 +124,7 @@ module SMS
   end
 
   module HTTP
-    Error = Class.new(StandardError) # Better to classify network errors separately
+    Error = Class.new(SMS::Error) # Better to classify network errors separately
 
     module_function
 

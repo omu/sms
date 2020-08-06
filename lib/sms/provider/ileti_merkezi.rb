@@ -29,7 +29,7 @@ module SMS
         </request>
       TEMPLATE
 
-      def after_post(_response)
+      def on_http_success(*)
         nil
       end
     end
