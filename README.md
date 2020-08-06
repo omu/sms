@@ -58,7 +58,7 @@ SMS.(provider: :verimor,
 module SMS
   module Provider
     class Acme < Base
-      posting   endpoint: 'https://example.com/send'
+      posting   endpoint: 'https://example.com/send',
                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
 
       rendering content:  <<~TEMPLATE
@@ -82,7 +82,7 @@ olarak) yapılandırılmış olmalıdır.  Sağlayıcı bunun dışında bir nit
 module SMS
   module Provider
     class Acme < Base
-      posting   endpoint: 'https://example.com/send'
+      posting   endpoint: 'https://example.com/send',
                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
 
       rendering required: %i[customer_no], content:  <<~TEMPLATE
@@ -103,8 +103,8 @@ Sağlayıcıya veri gönderilirken farklı bir HTTP seçeneğine ihtiyaç duyars
 module SMS
   module Provider
     class Acme < Base
-      posting   endpoint: 'https://example.com/send'
-                header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+      posting   endpoint: 'https://example.com/send',
+                header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
 		options:  { ssl_version: :TLSv1_2 }.freeze
 
       rendering content:  <<~TEMPLATE
