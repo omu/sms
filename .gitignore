@@ -1,0 +1,4 @@
+/.envrc
+/.bundle
+/vendor/*
+/.rubocop-*-yml

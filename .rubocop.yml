@@ -1,0 +1,12 @@
+require:
+  - rubocop-performance
+  - rubocop-minitest
+
+inherit_from:
+  - https://raw.githubusercontent.com/omu/omu/master/etc/rubocop/rubocop.yml
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.7
