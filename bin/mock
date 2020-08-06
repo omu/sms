@@ -1,1 +1,81 @@
-sms
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'webmock'
+require 'webmock/test_unit'
+
+require 'sms'
+
+def mock(**args) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  WebMock.enable!
+
+  endpoint = SMS::Provider.provider(args[:provider]).api.endpoint
+
+  WebMock.stub_request(:post, endpoint)
+
+  WebMock.after_request do |req, _|
+    request = {
+      uri:     req.uri.to_s,
+      method:  req.method.to_s.upcase,
+      headers: req.headers,
+      body:    req.body
+    }
+
+    puts "Endpoint: #{request[:uri]}"
+    puts "Headers:  #{request[:headers]}"
+    puts
+    puts request[:body]
+  end
+
+  result = SMS.(**args)
+
+  WebMock::CallbackRegistry.reset
+  WebMock.reset_executed_requests!
+  WebMock.disable!
+
+  result
+end
+
+def pretty(*args)
+  require 'amazing_print'
+  ap(*args)
+rescue LoadError
+  require 'pp'
+  pp(*args)
+end
+
+def report(result)
+  puts
+  print 'Result: '
+  if result.ok?
+    pretty result.inspect
+  else
+    pretty result.error.to_s
+  end
+end
+
+def main # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  abort "Usage: #{$PROGRAM_NAME} key=value" if ARGV.size.zero?
+
+  args = {}
+  ARGV.each do |arg|
+    abort "key=value require: #{arg}" unless (m = arg.match(/^(?<key>\w+)=(?<value>.*)/))
+
+    args[m[:key].to_sym] = m[:value]
+  end
+
+  abort 'Provider required at least.' unless args.key? :provider
+
+  report mock(**{
+    user: 'USER',
+    pass: 'PASS',
+    from: 'FROM',
+    no:   'NO',
+    to:   'NUMBER',
+    body: 'BODY'
+  }.merge(args))
+rescue SMS::Error => e
+  abort("\nError: #{e.message}")
+end
+
+main
