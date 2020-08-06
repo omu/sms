@@ -8,7 +8,7 @@ module SMS
 
       rendering content: <<~TEMPLATE
         <?xml version="1.0" encoding="UTF-8"?>
-        <smspack ka="<%= user %>" pwd="<%= pass %>" org="<%= from %>" charset="turkish" >
+        <smspack ka="<%= user %>" pwd="<%= pass %>" org="<%= from %>" charset="turkish">
           <mesaj>
             <metin><%= body.encode(xml: :text) %></metin>
             <nums><%= to.join(',') %></nums>

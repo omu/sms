@@ -8,7 +8,7 @@ class MutluCellTest < Minitest::Test
   ENDPOINT = SMS::Provider.provider(PROVIDER).api.endpoint
   POST     = <<~POST
     <?xml version="1.0" encoding="UTF-8"?>
-    <smspack ka="USER" pwd="PASS" org="FROM" charset="turkish" >
+    <smspack ka="USER" pwd="PASS" org="FROM" charset="turkish">
       <mesaj>
         <metin>BODY</metin>
         <nums>TO</nums>
@@ -43,7 +43,7 @@ class MutluCellTest < Minitest::Test
     SMS.(to: %w[TO1 TO2], body: 'NEW_BODY')
     WebMock.assert_requested :post, ENDPOINT, body: <<~POST
       <?xml version="1.0" encoding="UTF-8"?>
-      <smspack ka="USER" pwd="PASS" org="FROM" charset="turkish" >
+      <smspack ka="USER" pwd="PASS" org="FROM" charset="turkish">
         <mesaj>
           <metin>NEW_BODY</metin>
           <nums>TO1,TO2</nums>
