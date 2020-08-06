@@ -7,8 +7,22 @@ require 'webmock/test_unit'
 require 'sms'
 
 RESPONSE = {
-  mutlu_cell: {
+  mutlu_cell:    {
     body: '$1#1.0'
+  },
+  ileti_merkezi: {
+    body: <<~BODY
+      <?xml version="1.0" encoding="UTF-8"?>
+      <response>
+        <status>
+          <code>200</code>
+          <message>İşlem başarılı</message>
+        </status>
+        <order>
+          <id>428</id>
+        </order>
+      </response>
+    BODY
   }
 }.freeze
 

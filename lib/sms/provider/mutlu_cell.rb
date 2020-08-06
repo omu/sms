@@ -24,7 +24,7 @@ module SMS
         (?<consumed_credits>.+)
       /x.freeze
 
-      ERROR_CODES  = {
+      ERROR_CODES = {
         '20' => 'Post edilen xml eksik veya hatalı.',
         '21' => 'Kullanılan originatöre sahip değilsiniz',
         '22' => 'Kontörünüz yetersiz',
