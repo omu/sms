@@ -2,6 +2,7 @@
 
 module SMS
   module Provider
+    # https://www.mutlucell.com.tr/api/
     class MutluCell < Base
       posting   endpoint: 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex',
                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
