@@ -6,12 +6,20 @@ require 'webmock/test_unit'
 
 require 'sms'
 
+RESPONSE = {
+  mutlu_cell: {
+    body: '$1#1.0'
+  }
+}.freeze
+
 def mock(**args) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   WebMock.enable!
 
-  endpoint = SMS::Provider.provider(args[:provider]).api.endpoint
+  provider  = args[:provider].to_sym
+  endpoint  = SMS::Provider.provider(provider).api.endpoint
+  to_return = RESPONSE[provider]
 
-  WebMock.stub_request(:post, endpoint)
+  WebMock.stub_request(:post, endpoint).to_return(status: 200, **to_return)
 
   WebMock.after_request do |req, _|
     request = {
