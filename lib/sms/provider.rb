@@ -70,6 +70,7 @@ module SMS
     end
   end
 
+  require_relative 'provider/ileti_merkezi'
   require_relative 'provider/mutlu_cell'
   require_relative 'provider/vatan_sms'
   require_relative 'provider/verimor'
