@@ -2,9 +2,9 @@
 
 module SMS
   module DSL
-    API       = Struct.new :endpoint, :header, :options, keyword_init: true
+    API      = Struct.new :endpoint, :header, :options, keyword_init: true
 
-    Template  = Struct.new :label, :required, :content, keyword_init: true do
+    Template = Struct.new :required, :content, keyword_init: true do
       def config_class
         Structable.build(required: required)
       end
@@ -14,8 +14,9 @@ module SMS
       end
     end
 
-    Callbacks = Struct.new :success, :failure, keyword_init: true
-    attr_reader :api, :templates, :callbacks
+    Callback = Struct.new :success, :failure, keyword_init: true
+
+    attr_reader :api, :template, :callback
 
     def posting(endpoint:, header: {}, options: {})
       @api = API.new endpoint: endpoint, header: header, options: options
@@ -27,14 +28,12 @@ module SMS
       user
     ].freeze
 
-    def rendering(label = :default, required: [], content:)
-      (@templates ||= {})[label.to_sym] = Template.new(label:    label,
-                                                       required: [*ALWAYS_REQUIRED, *required].uniq,
-                                                       content:  content)
+    def rendering(required: [], content:)
+      @template = Template.new(required: [*ALWAYS_REQUIRED, *required].uniq, content: content)
     end
 
     def responding(on:, &block)
-      (@callbacks ||= Callbacks.new).public_send("#{on}=", block)
+      (@callback ||= Callback.new).public_send("#{on}=", block)
     end
   end
 end

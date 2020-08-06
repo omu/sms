@@ -32,11 +32,10 @@ module SMS
         SMS::Provider.available[klass.name.underscore.split('/').last.to_sym] = klass
       end
 
-      attr_reader :config, :purpose
+      attr_reader :config
 
       def initialize(**args)
-        @purpose = args.delete(:purpose) || :default
-        @config  = template.config_class.new(**args)
+        @config = template.config_class.new(**args)
         after_initialize
       rescue ArgumentError => e
         raise Error, "#{self.class}: #{e.message}"
@@ -51,20 +50,20 @@ module SMS
       def after_initialize; end
 
       def template
-        self.class.templates[purpose]
+        self.class.template
       end
 
       def post(data) # rubocop:disable Metrics/AbcSize
-        api, callbacks = self.class.api, self.class.callbacks
+        api, callback = self.class.api, self.class.callback
 
         result = Result.new SMS::HTTP.post(data: data, endpoint: api.endpoint, options: api.options, header: api.header)
-        callbacks.success.(result)
+        callback.success.(result)
         raise ProviderError, result.error if result.notok?
 
         result
       rescue HTTP::Error => e
         result.error = e.message
-        callbacks.failure&.(result)
+        callback.failure&.(result)
         raise
       end
 
