@@ -22,7 +22,7 @@ module SMS
         (?<message_id>[^#]+)
         [#]
         (?<consumed_credits>.+)
-        /x.freeze
+      /x.freeze
 
       ERROR_CODES  = {
         '20' => 'Post edilen xml eksik veya hatalı.',
