@@ -65,6 +65,10 @@ module SMS
         <?xml version="1.0" encoding="UTF-8"?>
 	...
       TEMPLATE
+
+      def on_http_success(result)
+	result.detail.credits = result.response.body&.to_s
+      end
     end
   end
 end
@@ -72,7 +76,9 @@ end
 
 Bu örnekte görülen `TEMPLATE` API isteklerinde render edilerek POST edilen bir
 ERB şablonudur.  Şablonda (öncelik sırasıyla) `message` nesnesi ve `Provider`
-yapılandırmasında tanımlı tüm nitelikleri kullanabilirsiniz.
+yapılandırmasında tanımlı tüm nitelikleri kullanabilirsiniz. Örnekte görülen
+`on_http_success` metodu (istisna üretmeden sonlanan) başarılı POST işlemi
+sonrasında çalıştırılır ve her sağlayıcı tarafından gerçeklenmelidir.
 
 Asgari olarak tüm sağlayıcılarda `user`, `pass` ve `from` (öntanımlı değer
 olarak) yapılandırılmış olmalıdır.  Sağlayıcı bunun dışında bir nitelik,
@@ -91,6 +97,10 @@ module SMS
 	...
 	</sms>
       TEMPLATE
+
+      def on_http_success(result)
+	result.detail.credits = result.response.body&.to_s
+      end
     end
   end
 end
@@ -111,6 +121,10 @@ module SMS
         <?xml version="1.0" encoding="UTF-8"?>
 	...
       TEMPLATE
+
+      def on_http_success(result)
+	result.detail.credits = result.response.body&.to_s
+      end
     end
   end
 end
