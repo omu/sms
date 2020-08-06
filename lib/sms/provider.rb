@@ -54,17 +54,17 @@ module SMS
         self.class.templates[purpose]
       end
 
-      def post(data)
-        api = self.class.api
+      def post(data) # rubocop:disable Metrics/AbcSize
+        api, callbacks = self.class.api, self.class.callbacks
 
         result = Result.new SMS::HTTP.post(data: data, endpoint: api.endpoint, options: api.options, header: api.header)
-        on_http_success(result)
+        callbacks.success.(result)
         raise ProviderError, result.error if result.notok?
 
         result
       rescue HTTP::Error => e
         result.error = e.message
-        on_http_failure(result)
+        callbacks.failure&.(result)
         raise
       end
 

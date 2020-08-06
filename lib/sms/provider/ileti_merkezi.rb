@@ -29,8 +29,7 @@ module SMS
         </request>
       TEMPLATE
 
-      def on_http_success(*)
-        nil
+      responding on: :success do
       end
     end
   end

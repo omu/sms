@@ -4,10 +4,10 @@ module SMS
   module Provider
     # https://www.mutlucell.com.tr/api/
     class MutluCell < Base
-      posting   endpoint: 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex',
-                header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+      posting    endpoint: 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex',
+                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
 
-      rendering content: <<~TEMPLATE
+      rendering  content: <<~TEMPLATE
         <?xml version="1.0" encoding="UTF-8"?>
         <smspack ka="<%= user %>" pwd="<%= pass %>" org="<%= from %>" charset="turkish">
           <mesaj>
@@ -34,7 +34,7 @@ module SMS
         '30' => 'Hesap Aktivasyonu sağlanmamış'
       }.freeze
 
-      def on_http_success(result)
+      responding on: :success do |result|
         body = (result.response.body&.to_s || '').strip
 
         if (m = body.match(BODY_PATTERN))
