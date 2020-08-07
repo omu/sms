@@ -13,11 +13,12 @@ require 'webmock/test_unit'
 
 def dummy(**args)
   {
-    user: 'USER',
-    pass: 'PASS',
+    body: 'BODY',
+    date: 'DATE',
     from: 'FROM',
     no:   'NO',
+    pass: 'PASS',
     to:   'TO',
-    body: 'BODY'
+    user: 'USER'
   }.merge(**args)
 end
