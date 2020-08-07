@@ -21,7 +21,7 @@ class VatanSmsTest < Minitest::Test
 
   def setup
     WebMock.enable!
-    WebMock.stub_request(:post, ENDPOINT)
+    WebMock.stub_request(:post, ENDPOINT).to_return(body: '1:261799963:Gonderildi:1:0.0084:8', status: 200)
   end
 
   def teardown

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: Untested, unfinished
+
 module SMS
   module Provider
     # https://github.com/verimor/SMS-API/blob/master/user_guide.md#sms-g%C3%B6nderi%CC%87mi%CC%87

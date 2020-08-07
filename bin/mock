@@ -23,6 +23,9 @@ RESPONSE = {
         </order>
       </response>
     BODY
+  },
+  vatan_sms:     {
+    body: '1:261799963:Gonderildi:1:0.0084:8'
   }
 }.freeze
 
