@@ -5,7 +5,7 @@ module SMS
     include Structable.(:from, :to, :body, :date)
 
     def before_initialize
-      self.date = Time.now.strftime('%d/%m/%Y %H:%M')
+      self.date = Time.current.strftime('%d/%m/%Y %H:%M')
     end
 
     def after_initialize
