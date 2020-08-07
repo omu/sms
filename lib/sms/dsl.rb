@@ -14,7 +14,11 @@ module SMS
       end
     end
 
-    Callback = Struct.new :success, :failure, keyword_init: true
+    def (Callback = Struct.new(:success, :failure, :init, keyword_init: true)).create
+      empty = proc {}
+
+      new success: empty, failure: empty, init: empty
+    end
 
     attr_reader :api, :template, :callback
 
@@ -32,8 +36,10 @@ module SMS
       @template = Template.new(required: [*ALWAYS_REQUIRED, *required].uniq, content: content)
     end
 
-    def inspecting(on: :success, &block)
-      (@callback ||= Callback.new).public_send("#{on}=", block)
+    def calling(on: :success, &block)
+      (@callback ||= Callback.create).public_send("#{on}=", block)
     end
+
+    alias inspecting calling
   end
 end

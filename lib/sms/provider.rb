@@ -36,7 +36,7 @@ module SMS
 
       def initialize(**args)
         @config = template.config_class.new(**args)
-        after_initialize
+        self.class.callback.init.(self)
       rescue ArgumentError => e
         raise Error, "#{self.class}: #{e.message}"
       end
@@ -47,32 +47,22 @@ module SMS
 
       protected
 
-      def after_initialize; end
-
       def template
         self.class.template
       end
 
       def post(data) # rubocop:disable Metrics/AbcSize
-        api, callback = self.class.api, self.class.callback
+        api = self.class.api
 
         result = Result.new SMS::HTTP.post(data: data, endpoint: api.endpoint, options: api.options, header: api.header)
-        callback.success.(result)
+        self.class.callback.success.(result)
         raise ProviderError, result.error if result.notok?
 
         result
       rescue HTTP::Error => e
         result.error = e.message
-        callback.failure&.(result)
+        self.class.callback.failure.(result)
         raise
-      end
-
-      def on_http_success(*)
-        raise NotImplementedError
-      end
-
-      def on_http_failure(*)
-        # optional
       end
 
       def to_h
