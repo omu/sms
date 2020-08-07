@@ -28,7 +28,7 @@ module SMS
         </sms>
       TEMPLATE
 
-      responding on: :success do |result|
+      inspecting do |result|
         # Example: 1:261799963:Gonderildi:1:0.0084:8
         fields = (result.response.body&.to_s || '').strip.split(':')
 

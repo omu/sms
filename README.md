@@ -66,7 +66,7 @@ module SMS
         ...
       TEMPLATE
 
-      responding on: :success do |result|
+      inspecting do |result|
         result.detail.credits = result.response.body&.to_s
       end
     end
@@ -76,9 +76,10 @@ end
 
 Bu örnekte görülen `TEMPLATE` API isteklerinde render edilerek POST edilen bir
 ERB şablonudur.  Şablonda (öncelik sırasıyla) `message` nesnesi ve `Provider`
-yapılandırmasında tanımlı tüm nitelikleri kullanabilirsiniz. Örnekte görülen
-`:success` callback (istisna üretmeden sonlanan) başarılı bir POST işlemi
-sonrasında çalıştırılır ve her sağlayıcı tarafından gerçeklenmelidir.
+yapılandırmasında tanımlı tüm nitelikleri kullanabilirsiniz. Örnekte
+`inspecting` ile (istisna üretmeden sonlanan) başarılı bir POST işlemi
+sonrasında çalıştırılacak bir callback ayarlanır.  Bu callback her sağlayıcı
+tarafından gerçeklenmelidir.
 
 Asgari olarak tüm sağlayıcılarda `user`, `pass` ve `from` (öntanımlı değer
 olarak) yapılandırılmış olmalıdır.  Sağlayıcı bunun dışında bir nitelik,
@@ -98,7 +99,7 @@ module SMS
         </sms>
       TEMPLATE
 
-      responding on: :success do |result|
+      inspecting do |result|
         result.detail.credits = result.response.body&.to_s
       end
     end
@@ -122,7 +123,7 @@ module SMS
         ...
       TEMPLATE
 
-      responding on: :success do |result|
+      inspecting do |result|
         result.detail.credits = result.response.body&.to_s
       end
     end

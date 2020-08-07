@@ -54,7 +54,7 @@ module SMS
         '503' => 'Sunucu geçici olarak servis dışı'
       }.freeze
 
-      responding on: :success do |result|
+      inspecting do |result|
         doc  = REXML::Document.new(result.response.body&.to_s || '')
         code = doc.elements['response/status/code']&.first
 

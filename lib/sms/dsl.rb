@@ -32,7 +32,7 @@ module SMS
       @template = Template.new(required: [*ALWAYS_REQUIRED, *required].uniq, content: content)
     end
 
-    def responding(on:, &block)
+    def inspecting(on: :success, &block)
       (@callback ||= Callback.new).public_send("#{on}=", block)
     end
   end

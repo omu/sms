@@ -23,7 +23,7 @@ module SMS
         }
       TEMPLATE
 
-      responding on: :success do
+      inspecting do
       end
     end
   end

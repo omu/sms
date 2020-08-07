@@ -34,7 +34,7 @@ module SMS
         '30' => 'Hesap Aktivasyonu sağlanmamış'
       }.freeze
 
-      responding on: :success do |result|
+      inspecting do |result|
         body = (result.response.body&.to_s || '').strip
 
         if (m = body.match(BODY_PATTERN))
