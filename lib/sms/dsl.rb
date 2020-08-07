@@ -20,8 +20,6 @@ module SMS
       new success: empty, failure: empty, init: empty
     end
 
-    attr_reader :api, :template, :callback
-
     def posting(endpoint:, header: {}, options: {})
       @api = API.new endpoint: endpoint, header: header, options: options
     end
@@ -41,5 +39,13 @@ module SMS
     end
 
     alias inspecting calling
+
+    attr_reader(*(ATTRIBUTES = %i[api template callback].freeze))
+
+    def self.extended(base)
+      ATTRIBUTES.each do |attr|
+        base.define_method(attr) { self.class.public_send(attr) }
+      end
+    end
   end
 end
