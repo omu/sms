@@ -5,7 +5,19 @@ require 'net/http'
 require 'ostruct'
 require 'uri'
 
-require 'active_support/all'
+class String
+  # Stolen and adapted from ActiveSupport without acronym support
+  def underscore
+    return self unless /[A-Z-]|::/.match?(self)
+
+    word = gsub('::', '/')
+    word.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+    word.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
+    word.tr!('-', '_')
+    word.downcase!
+    word
+  end
+end
 
 module SMS
   class Structable < Module

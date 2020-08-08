@@ -7,10 +7,10 @@ require_relative 'sms/result'
 require_relative 'sms/dsl'
 require_relative 'sms/provider'
 
-require 'active_support/all'
-
 module SMS
-  mattr_accessor :default_provider
+  class << self
+    attr_accessor :default_provider
+  end
 
   module_function
 
