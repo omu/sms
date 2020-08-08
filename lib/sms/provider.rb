@@ -29,6 +29,8 @@ module SMS
       include Renderable
 
       def self.inherited(klass)
+        super
+
         SMS::Provider.available[klass.name.underscore.split('/').last.to_sym] = klass
       end
 

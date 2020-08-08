@@ -43,6 +43,8 @@ module SMS
     attr_reader(*(ATTRIBUTES = %i[api template callback].freeze))
 
     def self.extended(base)
+      super
+
       ATTRIBUTES.each do |attr|
         base.define_method(attr) { self.class.public_send(attr) }
       end

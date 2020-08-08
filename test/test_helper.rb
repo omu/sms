@@ -51,7 +51,7 @@ class BasicSuite < Module
 
   attr_reader(*(ATTRIBUTES = %i[provider endpoint inset outset config].freeze))
 
-  def initialize(**args)
+  def initialize(**args) # rubocop:disable Lint/MissingSuper
     @provider = args.fetch(:provider)
     @endpoint = SMS::Provider.provider(provider).api.endpoint
     @inset    = OpenStruct.new(**args.fetch(:inset))

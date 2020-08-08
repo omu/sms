@@ -40,12 +40,14 @@ module SMS
 
     attr_reader :members, :defaults
 
-    def initialize(*members, **defaults)
+    def initialize(*members, **defaults) # rubocop:disable Lint/MissingSuper
       @members  = [*members, *defaults.keys].uniq
       @defaults = defaults
     end
 
     def included(base)
+      super
+
       members, defaults = self.members, self.defaults
 
       base.attr_accessor(*members)
@@ -58,7 +60,7 @@ module SMS
     end
 
     module InstanceMethods
-      def initialize(**args)
+      def initialize(**args) # rubocop:disable Lint/MissingSuper
         self.class.defaults.each do |attr, value|
           public_send "#{attr}=", value
         end

@@ -9,4 +9,8 @@ Layout/SpaceAroundMethodCallOperator:
   Enabled: false
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.5
+
+# FIXME: Will be removed later
+Rails/TimeZone:
+  Enabled: false
