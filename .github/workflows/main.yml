@@ -12,11 +12,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: 2.7
       - name: Install dependencies
         run: |
           # Install bundler dependencies.
           bundle config set without development
           bundle install --jobs 4 --retry 3
+          sudo apt-get -yqq install libxml2-utils
       - name: Run tests
         run: |
           rake test
