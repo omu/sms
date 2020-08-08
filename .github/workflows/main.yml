@@ -1,0 +1,22 @@
+name: main
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Run linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          # Install bundler dependencies.
+          bundle config set without development
+          bundle install --jobs 4 --retry 3
+      - name: Run tests
+        run: |
+          rake test
