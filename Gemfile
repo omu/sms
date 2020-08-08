@@ -3,13 +3,15 @@
 source 'https://rubygems.org'
 ruby '>= 2.5'
 
-group :development, :test do
+gemspec
+
+group :development do
+  gem 'minitest-focus'
   gem 'rubocop'
   gem 'rubocop-minitest'
   gem 'rubocop-performance'
 end
 
 group :test do
-  gem 'minitest-focus'
   gem 'webmock'
 end

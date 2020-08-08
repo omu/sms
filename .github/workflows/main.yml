@@ -21,4 +21,4 @@ jobs:
           sudo apt-get -yqq install libxml2-utils
       - name: Run tests
         run: |
-          rake test
+          bundle exec rake test
