@@ -5,8 +5,6 @@ ruby '>= 2.5'
 
 gemspec
 
-gem 'rake'
-
 group :development do
   gem 'minitest-focus'
   gem 'rubocop'
@@ -14,6 +12,8 @@ group :development do
   gem 'rubocop-performance'
 end
 
-group :test do
+group :test, :development do
+  gem 'minitest'
+  gem 'rake'
   gem 'webmock'
 end
