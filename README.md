@@ -1,6 +1,8 @@
 `SMS`
 =====
 
+[![](https://github.com/omu/sms/workflows/main/badge.svg)](https://github.com/omu/sms/actions)
+
 # Kullanım
 
 Yapılandırma
