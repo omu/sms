@@ -6,21 +6,12 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.3.2)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 0.7, < 2)
-      minitest (~> 5.1)
-      tzinfo (~> 1.1)
-      zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
-    concurrent-ruby (1.1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     hashdiff (1.0.1)
-    i18n (1.8.5)
-      concurrent-ruby (~> 1.0)
     minitest (5.14.1)
     minitest-focus (1.2.1)
       minitest (>= 4, < 6)
@@ -29,7 +20,6 @@ GEM
       ast (~> 2.4.1)
     power_assert (1.2.0)
     public_suffix (4.0.5)
-    rack (2.2.3)
     rainbow (3.0.0)
     rake (13.0.1)
     regexp_parser (1.7.1)
@@ -49,23 +39,15 @@ GEM
       rubocop (>= 0.87)
     rubocop-performance (1.7.1)
       rubocop (>= 0.82.0)
-    rubocop-rails (2.7.1)
-      activesupport (>= 4.2.0)
-      rack (>= 1.1)
-      rubocop (>= 0.87.0)
     ruby-progressbar (1.10.1)
     safe_yaml (1.0.5)
     test-unit (3.3.6)
       power_assert
-    thread_safe (0.3.6)
-    tzinfo (1.2.7)
-      thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     webmock (3.8.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -77,7 +59,6 @@ DEPENDENCIES
   rubocop
   rubocop-minitest
   rubocop-performance
-  rubocop-rails
   sms!
   test-unit
   webmock

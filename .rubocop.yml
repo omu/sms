@@ -1,16 +1,10 @@
-require:
-  - rubocop-performance
-  - rubocop-minitest
-
 inherit_from:
   - https://raw.githubusercontent.com/omu/omu/master/etc/rubocop/rubocop.yml
+  - https://raw.githubusercontent.com/omu/omu/master/etc/rubocop/rubocop-performance.yml
+  - https://raw.githubusercontent.com/omu/omu/master/etc/rubocop/rubocop-minitest.yml
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false
 
 AllCops:
   TargetRubyVersion: 2.5
-
-# FIXME: Will be removed later
-Rails/TimeZone:
-  Enabled: false
