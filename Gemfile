@@ -5,6 +5,8 @@ ruby '>= 2.5'
 
 gemspec
 
+gem 'rake'
+
 group :development do
   gem 'minitest-focus'
   gem 'rubocop'
