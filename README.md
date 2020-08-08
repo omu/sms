@@ -1,7 +1,7 @@
 `SMS`
 =====
 
-[![](https://github.com/omu/sms/workflows/main/badge.svg)](https://github.com/omu/sms/actions)
+[![](https://github.com/omu/sms/workflows/test/badge.svg)](https://github.com/omu/sms/actions)
 
 # Kullanım
 
