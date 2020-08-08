@@ -10,5 +10,5 @@ Gem::Specification.new do |spec|
   spec.name                  = 'sms'
   spec.required_ruby_version = '>= 2.5'
   spec.summary               = 'Send SMS through various SMS providers (mostly in Turkey)'
-  spec.version               = '0.1.0'
+  spec.version               = '0.2.0'
 end
