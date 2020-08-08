@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    name: Run linters
+    name: Lint and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,6 +19,9 @@ jobs:
           bundle config set without development
           bundle install --jobs 4 --retry 3
           sudo apt-get -yqq install libxml2-utils
-      - name: Run tests
+      - name: Lint
+        run: |
+          bundle exec rubocop
+      - name: Test
         run: |
           bundle exec rake test
