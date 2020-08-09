@@ -21,7 +21,7 @@ jobs:
           sudo apt-get -yqq install libxml2-utils
       - name: Lint
         run: |
-          bundle exec rubocop
+          bundle exec lint
       - name: Test
         run: |
           bundle exec rake test
