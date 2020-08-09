@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+$LOAD_PATH.unshift(File.expand_path('lib', __dir__))
+require 'sms/version'
+
 Gem::Specification.new do |spec|
   spec.author                = 'OMU BAUM Crew'
   spec.description           = 'Send SMS'
@@ -10,5 +13,5 @@ Gem::Specification.new do |spec|
   spec.name                  = 'sms'
   spec.required_ruby_version = '>= 2.5'
   spec.summary               = 'Send SMS through various SMS providers (mostly in Turkey)'
-  spec.version               = '0.2.3'
+  spec.version               = SMS::VERSION
 end
