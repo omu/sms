@@ -142,10 +142,11 @@ end
 
 Tüm değişiklikler tamamlandıktan sonra:
 
-1. Test ve Lint
+1. Lint ve Test
 
    ```sh
-   bundle rake lint && bundle rake test
+   bundle rake lint
+   bundle rake test
    ```
 
    Varsa hataları düzelt
