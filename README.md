@@ -137,3 +137,45 @@ module SMS
   end
 end
 ```
+
+# Sürümleme
+
+Tüm değişiklikler tamamlandıktan sonra:
+
+1. Test ve Lint
+
+   ```sh
+   bundle rake lint && bundle rake test
+   ```
+
+   Varsa hataları düzelt
+
+2. Komitle
+
+   ```sh
+   git commit -a
+   git push origin master
+   ```
+
+   CI'da hata varsa düzeltinceye kadar devam et
+
+3. Sürüm yükselt
+
+   ```sh
+   $EDITOR lib/sms/version.rb
+   git commit -a -m "Yeni sürüm: «sürüm»"
+   git push origin master
+   ```
+
+4. Etiketle
+
+   ```sh
+   git tag -a «sürüm» -m «sürüm»
+   git push --tags origin
+   ```
+
+5. Paketle
+
+   ```sh
+   bundle rake package
+   ```
