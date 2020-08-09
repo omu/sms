@@ -1,7 +1,12 @@
 `SMS`
 =====
 
+[![Beta](https://omu.sh/assets/badge/beta.svg)](https://omu.sh "BAUM Beta")
 [![](https://github.com/omu/sms/workflows/test/badge.svg)](https://github.com/omu/sms/actions)
+
+# Kurulum
+
+[Gem paketi](https://github.com/omu/sms/packages/348014) olarak kurabilirsiniz.
 
 # Kullanım
 
