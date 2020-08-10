@@ -6,7 +6,12 @@
 
 # Kurulum
 
-[Gem paketi](https://github.com/omu/sms/packages/348014) olarak kurabilirsiniz.
+[Gem paketi](https://github.com/omu/sms/packages/348014) olarak kurabilirsiniz.  Paketi alternatif olarak aşağıdaki gibi
+bir Gemfile satırıyla doğrudan depodan da kurabilirsiniz.
+
+```
+gem 'sms', github: 'omu/sms'
+```
 
 # Kullanım
 
