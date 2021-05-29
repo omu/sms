@@ -150,8 +150,8 @@ Tüm değişiklikler tamamlandıktan sonra:
 1. Lint ve Test
 
    ```sh
-   bundle rake lint
-   bundle rake test
+   bundle exec rake lint
+   bundle exec rake test
    ```
 
    Varsa hataları düzelt
@@ -183,5 +183,5 @@ Tüm değişiklikler tamamlandıktan sonra:
 5. Paketle
 
    ```sh
-   bundle rake package
+   bundle exec rake package
    ```
