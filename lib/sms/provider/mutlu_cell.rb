@@ -20,7 +20,7 @@ module SMS
       BODY_PATTERN = /
         [$]
         (?<message_id>[^#]+)
-        [#]
+        #
         (?<consumed_credits>.+)
       /x.freeze
 

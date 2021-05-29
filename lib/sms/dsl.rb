@@ -14,10 +14,12 @@ module SMS
       end
     end
 
-    def (Callback = Struct.new(:success, :failure, :init, keyword_init: true)).create
-      empty = proc {}
+    Callback = Struct.new(:success, :failure, :init, keyword_init: true) do
+      def self.create
+        empty = proc {}
 
-      new success: empty, failure: empty, init: empty
+        new success: empty, failure: empty, init: empty
+      end
     end
 
     def posting(endpoint:, header: {}, options: {})
@@ -30,7 +32,7 @@ module SMS
       user
     ].freeze
 
-    def rendering(required: [], content:)
+    def rendering(content:, required: [])
       @template = Template.new(required: [*ALWAYS_REQUIRED, *required].uniq, content: content)
     end
 

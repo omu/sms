@@ -13,7 +13,7 @@ module SMS
     class VatanSms < Base
       posting   endpoint: 'https://www.oztekbayi.com/panel/smsgonder1Npost.php',
                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
-                options:  { ssl_version: :TLSv1_2 }.freeze
+                options:  { ssl_version: :TLSv1_2 }.freeze # rubocop:disable Naming/VariableNumber
 
       rendering required: %i[no], content: <<~TEMPLATE
         <?xml version="1.0" encoding="UTF-8"?>

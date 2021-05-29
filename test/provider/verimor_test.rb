@@ -12,7 +12,7 @@ class VerimorTest < Minitest::Test
           "password"   : "PASS",
           "source_addr": "FROM",
           "messages"   : [
-            { 
+            {#{' '}
               "msg" : "BODY",
               "dest": "TO"
             }
@@ -25,7 +25,7 @@ class VerimorTest < Minitest::Test
           "password"   : "PASS",
           "source_addr": "FROM",
           "messages"   : [
-            { 
+            {#{' '}
               "msg" : "BODY",
               "dest": "TO1,TO2"
             }

@@ -15,7 +15,7 @@ module SMS
           "password"   : "<%= pass %>",
           "source_addr": "<%= from %>",
           "messages"   : [
-            { 
+            {#{' '}
               "msg" : "<%= body %>",
               "dest": "<%= to.join(',') %>"
             }
@@ -24,6 +24,7 @@ module SMS
       TEMPLATE
 
       inspecting do
+        # TODO: implement
       end
     end
   end
