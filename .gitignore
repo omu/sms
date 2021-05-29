@@ -1,4 +1,5 @@
-/.envrc
 /.bundle
-/vendor/*
+/.envrc
 /.rubocop-*-yml
+/Gemfile.lock
+/vendor/*
