@@ -6,11 +6,8 @@
 
 # Kurulum
 
-[Gem paketi](https://github.com/omu/sms/packages/348014) olarak kurabilirsiniz.  Paketi alternatif olarak aşağıdaki gibi
-bir Gemfile satırıyla doğrudan depodan da kurabilirsiniz.
-
-```ruby
-gem 'sms', github: 'omu/sms'
+```sh
+gem install omu-sms
 ```
 
 # Kullanım
@@ -18,47 +15,41 @@ gem 'sms', github: 'omu/sms'
 Yapılandırma
 
 ```ruby
-SMS.configure provider: :mutlu_cell,
-              user:     'cezmi',
-              pass:     'secret',
-              from:     'OMUBAUM',
-              title:    'Ondokuz Mayıs Üniversitesi' # isteğe bağlı
-```
-
-Nokul'da yapılandırma
-
-```ruby
-SMS.configure(**Nokul::Tenant.credentials.sms.to_h)
+OMU::SMS.configure provider: :mutlu_cell,
+                   user:     'cezmi',
+                   pass:     'secret',
+                   from:     'OMUBAUM',
+                   title:    'Ondokuz Mayıs Üniversitesi' # isteğe bağlı
 ```
 
 Gönderim
 
 ```ruby
-SMS.(to: %w[1234567 7654321], body: 'foo bar baz')
+OMU::SMS.(to: %w[1234567 7654321], body: 'foo bar baz')
 ```
 
 Yapılandırmadan ön tanımlı gelen `from` alanını değiştir
 
 ```ruby
-SMS.(to: %w[1234567 7654321], body: 'foo bar baz', from 'OMUUZEM')
+OMU::SMS.(to: %w[1234567 7654321], body: 'foo bar baz', from 'OMUUZEM')
 ```
 
 Yapılandırmadan ön tanımlı gelen `date` alanını değiştir
 
 ```ruby
-SMS.(to: %w[1234567 7654321], body: 'foo bar baz', date: '02/08/2020 01:53')
+OMU::SMS.(to: %w[1234567 7654321], body: 'foo bar baz', date: '02/08/2020 01:53')
 ```
 
 Yapılandırmasız şekilde her şeyi açık ver
 
 ```ruby
-SMS.(provider: :verimor,
-     user:     'cezmi',
-     pass:     'secret',
-     from:     'OMUBAUM',
-     to:       '1234567', # tek numara da olabilir
-     date:     '02/08/2020 01:53',
-     body:     'foo bar baz')
+OMU::SMS.(provider: :verimor,
+          user:     'cezmi',
+          pass:     'secret',
+          from:     'OMUBAUM',
+          to:       '1234567', # tek numara da olabilir
+          date:     '02/08/2020 01:53',
+          body:     'foo bar baz')
 ```
 
 # Geliştirme
@@ -67,19 +58,21 @@ SMS.(provider: :verimor,
 `acme.rb` isimli bir sürücü oluştur.
 
 ```ruby
-module SMS
-  module Provider
-    class Acme < Base
-      posting    endpoint: 'https://example.com/send',
-                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
-
-      rendering  content:  <<~TEMPLATE
-        <?xml version="1.0" encoding="UTF-8"?>
-        ...
-      TEMPLATE
-
-      inspecting do |result|
-        result.detail.credits = result.response.body&.to_s
+module OMU
+  module SMS
+    module Provider
+      class Acme < Base
+        posting    endpoint: 'https://example.com/send',
+                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+  
+        rendering  content:  <<~TEMPLATE
+          <?xml version="1.0" encoding="UTF-8"?>
+          ...
+        TEMPLATE
+  
+        inspecting do |result|
+          result.detail.credits = result.response.body&.to_s
+        end
       end
     end
   end
@@ -98,21 +91,23 @@ olarak) yapılandırılmış olmalıdır.  Sağlayıcı bunun dışında bir nit
 örneğin `customer_no` gerektiriyorsa aşağıdaki örnekten yararlanabilirsiniz.
 
 ```ruby
-module SMS
-  module Provider
-    class Acme < Base
-      posting    endpoint: 'https://example.com/send',
-                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
-
-      rendering  required: %i[customer_no], content:  <<~TEMPLATE
-        <?xml version="1.0" encoding="UTF-8"?>
-        <sms customer=<%= customer_no %>>
-        ...
-        </sms>
-      TEMPLATE
-
-      inspecting do |result|
-        result.detail.credits = result.response.body&.to_s
+module OMU
+  module SMS
+    module Provider
+      class Acme < Base
+        posting    endpoint: 'https://example.com/send',
+                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+  
+        rendering  required: %i[customer_no], content:  <<~TEMPLATE
+          <?xml version="1.0" encoding="UTF-8"?>
+          <sms customer=<%= customer_no %>>
+          ...
+          </sms>
+        TEMPLATE
+  
+        inspecting do |result|
+          result.detail.credits = result.response.body&.to_s
+        end
       end
     end
   end
@@ -123,20 +118,22 @@ Sağlayıcıya veri gönderilirken farklı bir HTTP seçeneğine ihtiyaç duyars
 `options` seçeneğini ayarlayın.
 
 ```ruby
-module SMS
-  module Provider
-    class Acme < Base
-      posting    endpoint: 'https://example.com/send',
-                 header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
-                 options:  { ssl_version: :TLSv1_2 }.freeze
-
-      rendering  content:  <<~TEMPLATE
-        <?xml version="1.0" encoding="UTF-8"?>
-        ...
-      TEMPLATE
-
-      inspecting do |result|
-        result.detail.credits = result.response.body&.to_s
+module OMU
+  module SMS
+    module Provider
+      class Acme < Base
+        posting    endpoint: 'https://example.com/send',
+                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
+                   options:  { ssl_version: :TLSv1_2 }.freeze
+  
+        rendering  content:  <<~TEMPLATE
+          <?xml version="1.0" encoding="UTF-8"?>
+          ...
+        TEMPLATE
+  
+        inspecting do |result|
+          result.detail.credits = result.response.body&.to_s
+        end
       end
     end
   end
@@ -168,7 +165,7 @@ Tüm değişiklikler tamamlandıktan sonra:
 3. Sürüm yükselt
 
    ```sh
-   $EDITOR lib/sms/version.rb
+   $EDITOR lib/omu/sms/version.rb
    git commit -a -m "Yeni sürüm: «sürüm»"
    git push origin master
    ```
