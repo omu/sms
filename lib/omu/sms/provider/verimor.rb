@@ -2,7 +2,7 @@
 
 # TODO: Untested, unfinished
 
-module SMS
+module OMU::SMS
   module Provider
     # https://github.com/verimor/SMS-API/blob/master/user_guide.md#sms-g%C3%B6nderi%CC%87mi%CC%87
     class Verimor < Base

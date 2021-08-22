@@ -2,7 +2,7 @@
 
 require 'rexml/document'
 
-module SMS
+module OMU::SMS
   module Provider
     # https://a2psmsapi.com/?ref=iletimerkezicom#apidoc
     class IletiMerkezi < Base

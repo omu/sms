@@ -6,5 +6,9 @@ inherit_from:
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  Exclude:
+    - lib/omu/sms/provider/*
+
 AllCops:
   TargetRubyVersion: 2.5

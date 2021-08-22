@@ -15,16 +15,12 @@ task :lint do
 end
 
 task :clean do
-  sh 'rm -f sms-*.gem'
+  sh 'rm -f omu-sms-*.gem'
 end
 
 namespace :gem do
   task :build do
     sh 'gem build'
-  end
-
-  task :upload do
-    sh 'gem push --key github --host https://rubygems.pkg.github.com/omu sms-*.gem'
   end
 end
 

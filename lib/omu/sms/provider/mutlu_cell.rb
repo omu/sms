@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SMS
+module OMU::SMS
   module Provider
     # https://www.mutlucell.com.tr/api/
     class MutluCell < Base

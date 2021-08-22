@@ -7,7 +7,7 @@ require 'open3'
 require 'json'
 require 'ostruct'
 
-require 'sms'
+require 'omu/sms'
 
 require 'webmock'
 require 'webmock/test_unit'
@@ -53,7 +53,7 @@ class BasicSuite < Module
 
   def initialize(**args) # rubocop:disable Lint/MissingSuper
     @provider = args.fetch(:provider)
-    @endpoint = SMS::Provider.provider(provider).api.endpoint
+    @endpoint = OMU::SMS::Provider.provider(provider).api.endpoint
     @inset    = OpenStruct.new(**args.fetch(:inset))
     @outset   = OpenStruct.new(**args.fetch(:outset))
     @config   = args.fetch(config, CONFIG).merge(provider: provider)
@@ -92,30 +92,30 @@ class BasicSuite < Module
     end
 
     def teardown
-      SMS.unconfigure
+      OMU::SMS.unconfigure
       WebMock.reset_executed_requests!
       WebMock.disable!
     end
 
     def test_when_default
       WebMock.stub_request(:post, endpoint).to_return(body: outset.success, status: 200)
-      SMS.configure(**config)
-      SMS.(**message)
+      OMU::SMS.configure(**config)
+      OMU::SMS.(**message)
       WebMock.assert_requested :post, endpoint, body: inset.single
     end
 
     def test_when_not_default
       WebMock.stub_request(:post, endpoint).to_return(body: outset.success, status: 200)
 
-      SMS.(**config, **message)
+      OMU::SMS.(**config, **message)
       WebMock.assert_requested :post, endpoint, body: inset.single
     end
 
     def test_multiple_receipents
       WebMock.stub_request(:post, endpoint).to_return(body: outset.success, status: 200)
 
-      SMS.configure(**config)
-      SMS.(**message(to: %w[TO1 TO2]))
+      OMU::SMS.configure(**config)
+      OMU::SMS.(**message(to: %w[TO1 TO2]))
       WebMock.assert_requested :post, endpoint, body: inset.multi
     end
   end
