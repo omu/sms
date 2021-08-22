@@ -24,4 +24,4 @@ namespace :gem do
   end
 end
 
-task package: ['clean', 'gem:build', 'gem:upload']
+task package: %w[clean gem:build]
