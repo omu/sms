@@ -58,22 +58,18 @@ OMU::SMS.(provider: :verimor,
 `acme.rb` isimli bir sürücü oluştur.
 
 ```ruby
-module OMU
-  module SMS
-    module Provider
-      class Acme < Base
-        posting    endpoint: 'https://example.com/send',
-                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+module OMU::SMS::Provider
+  class Acme < Base
+    posting    endpoint: 'https://example.com/send',
+               header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
   
-        rendering  content:  <<~TEMPLATE
-          <?xml version="1.0" encoding="UTF-8"?>
-          ...
-        TEMPLATE
+    rendering  content:  <<~TEMPLATE
+      <?xml version="1.0" encoding="UTF-8"?>
+      ...
+    TEMPLATE
   
-        inspecting do |result|
-          result.detail.credits = result.response.body&.to_s
-        end
-      end
+    inspecting do |result|
+      result.detail.credits = result.response.body&.to_s
     end
   end
 end
@@ -91,24 +87,20 @@ olarak) yapılandırılmış olmalıdır.  Sağlayıcı bunun dışında bir nit
 örneğin `customer_no` gerektiriyorsa aşağıdaki örnekten yararlanabilirsiniz.
 
 ```ruby
-module OMU
-  module SMS
-    module Provider
-      class Acme < Base
-        posting    endpoint: 'https://example.com/send',
-                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
+module OMU::SMS::Provider
+  class Acme < Base
+    posting    endpoint: 'https://example.com/send',
+               header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze
   
-        rendering  required: %i[customer_no], content:  <<~TEMPLATE
-          <?xml version="1.0" encoding="UTF-8"?>
-          <sms customer=<%= customer_no %>>
-          ...
-          </sms>
-        TEMPLATE
+    rendering  required: %i[customer_no], content:  <<~TEMPLATE
+      <?xml version="1.0" encoding="UTF-8"?>
+      <sms customer=<%= customer_no %>>
+      ...
+      </sms>
+    TEMPLATE
   
-        inspecting do |result|
-          result.detail.credits = result.response.body&.to_s
-        end
-      end
+    inspecting do |result|
+      result.detail.credits = result.response.body&.to_s
     end
   end
 end
@@ -118,23 +110,19 @@ Sağlayıcıya veri gönderilirken farklı bir HTTP seçeneğine ihtiyaç duyars
 `options` seçeneğini ayarlayın.
 
 ```ruby
-module OMU
-  module SMS
-    module Provider
-      class Acme < Base
-        posting    endpoint: 'https://example.com/send',
-                   header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
-                   options:  { ssl_version: :TLSv1_2 }.freeze
+module OMU::SMS::Provider
+  class Acme < Base
+    posting    endpoint: 'https://example.com/send',
+               header:   { 'content-type' => 'text/xml;charset=utf-8', 'accept' => 'xml' }.freeze,
+               options:  { ssl_version: :TLSv1_2 }.freeze
   
-        rendering  content:  <<~TEMPLATE
-          <?xml version="1.0" encoding="UTF-8"?>
-          ...
-        TEMPLATE
+    rendering  content:  <<~TEMPLATE
+      <?xml version="1.0" encoding="UTF-8"?>
+      ...
+    TEMPLATE
   
-        inspecting do |result|
-          result.detail.credits = result.response.body&.to_s
-        end
-      end
+    inspecting do |result|
+      result.detail.credits = result.response.body&.to_s
     end
   end
 end
